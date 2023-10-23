@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UPI Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        h1 {
+            color: #0073e6;
+        }
+
+        .step {
+            border: 1px solid #0073e6;
+            border-radius: 5px;
+            text-align: center;
+            color: #0073e6;
+            padding: 20px;
+            margin: 20px 0; /* Add margin to separate the steps vertically */
+        }
+
+        .step-number {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .copy-button {
+            background-color: #0073e6;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .transaction-form {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Make a UPI Payment</h1>
+
+        <div class="step">
+            <span class="step-number">Step 1:</span> Copy Amount and Bank Account Information
+            <p class="upi-info">Name: Your Name</p>
+            <p class="upi-info">Amount: ₹Amount</p>
+            <p class="upi-info">UPI ID: yourupiaddress@bank</p>
+            <button class="copy-button" onclick="copyUPIID()">Copy UPI ID</button>
+        </div>
+
+        <div class="step">
+            <span class="step-number">Step 2:</span> Transfer and don't modify this amount to us.
+            <p>Please record your reference No. <span id="refNo">Ref No.</span> after payment</p>
+        </div>
+
+        <div class="step">
+            <span class="step-number">Step 3:</span> Please Enter Ref No. to complete the recharge
+            <div class="transaction-form">
+                <form action="process_payment.php" method="post">
+                    <label for="transactionID">Transaction ID:</label>
+                    <input type="text" id="transactionID" name="transactionID" required>
+                    <br>
+                    <input type="submit" value="Submit Transaction ID">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyUPIID() {
+            var upiID = 'yourupiaddress@bank';
+            var tempInput = document.createElement("input");
+            tempInput.value = upiID;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("UPI ID copied to clipboard: " + upiID);
+        }
+    </script>
+</body>
+</html>
